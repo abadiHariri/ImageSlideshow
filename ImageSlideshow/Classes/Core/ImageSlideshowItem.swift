@@ -230,6 +230,7 @@ open class ImageSlideshowItem: UIScrollView, UIScrollViewDelegate {
     // MARK: UIScrollViewDelegate
 
     open func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "imageSlideshowItemZoomStatus"), object: nil, userInfo: ["isZoomed": scrollView.zoomScale != scrollView.minimumZoomScale])
         setPictoCenter()
     }
 
@@ -238,3 +239,4 @@ open class ImageSlideshowItem: UIScrollView, UIScrollViewDelegate {
     }
 
 }
+
