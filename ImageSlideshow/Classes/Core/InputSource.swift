@@ -10,6 +10,7 @@ import UIKit
 import Kingfisher
 /// A protocol that can be adapted by different Input Source providers
 @objc public protocol InputSource {
+    var isAnimatedImage: Bool { get set }
     /**
      Load image from the source to image view.
      - parameter imageView: Image view to load the image into.
@@ -17,34 +18,19 @@ import Kingfisher
      - parameter image: Image that was set to the image view.
      */
     func load(to imageView: UIImageView, with callback: @escaping (_ image: UIImage?) -> Void)
-
+    @objc optional func loadAnimated(to imageView: AnimatedImageView, with callback: @escaping (_ image: UIImage?) -> Void)
     /**
      Cancel image load on the image view
      - parameter imageView: Image view that is loading the image
     */
     @objc optional func cancelLoad(on imageView: UIImageView)
-}
-
-
-@objc public protocol InputNewSource {
-    /**
-     Load image from the source to image view.
-     - parameter imageView: Image view to load the image into.
-     - parameter callback: Callback called after image was set to the image view.
-     - parameter image: Image that was set to the image view.
-     */
-    func load(to imageView: AnimatedImageView, with callback: @escaping (_ image: UIImage?) -> Void)
-
-    /**
-     Cancel image load on the image view
-     - parameter imageView: Image view that is loading the image
-    */
-    @objc optional func cancelLoad(on imageView: AnimatedImageView)
+    @objc optional func cancelLoadAnimated(on imageView: AnimatedImageView)
 }
 
 /// Input Source to load plain UIImage
 @objcMembers
 open class ImageSource: NSObject, InputSource {
+    public var isAnimatedImage: Bool = false
     var image: UIImage
 
     /// Initializes a new Image Source with UIImage
@@ -74,6 +60,7 @@ open class ImageSource: NSObject, InputSource {
 /// Input Source to load an image from the main bundle
 @objcMembers
 open class BundleImageSource: NSObject, InputSource {
+    public var isAnimatedImage: Bool = false
     var imageString: String
 
     /// Initializes a new Image Source with an image name from the main bundle
@@ -93,6 +80,8 @@ open class BundleImageSource: NSObject, InputSource {
 /// Input Source to load an image from a local file path
 @objcMembers
 open class FileImageSource: NSObject, InputSource {
+    public var isAnimatedImage: Bool = false
+    
     var path: String
 
     /// Initializes a new Image Source with an image name from the main bundle

@@ -149,7 +149,7 @@ open class ImageSlideshow: UIView {
     open fileprivate(set) var scrollViewPage: Int = 0
 
     /// Input Sources loaded to slideshow
-    open fileprivate(set) var images = [InputSource & InputNewSource]()
+    open fileprivate(set) var images = [InputSource]()
 
     /// Image Slideshow Items loaded to slideshow
     open fileprivate(set) var slideshowItems = [ImageSlideshowItem]()
@@ -202,13 +202,17 @@ open class ImageSlideshow: UIView {
     open var contentScaleMode: UIViewContentMode = UIViewContentMode.scaleAspectFit {
         didSet {
             for view in slideshowItems {
-                view.imageView.contentMode = contentScaleMode
+                if view.image.isAnimatedImage {
+                    view.imageViewAnimated.contentMode = contentScaleMode
+                } else {
+                    view.imageView.contentMode = contentScaleMode
+                }
             }
         }
     }
 
     fileprivate var slideshowTimer: Timer?
-    fileprivate var scrollViewImages = [InputSource & InputNewSource]()
+    fileprivate var scrollViewImages = [InputSource]()
     fileprivate var isAnimating: Bool = false
 
     /// Transitioning delegate to manage the transition to full screen controller
@@ -365,13 +369,13 @@ open class ImageSlideshow: UIView {
      Set image inputs into the image slideshow
      - parameter inputs: Array of InputSource instances.
      */
-    open func setImageInputs(_ inputs: [InputSource & InputNewSource]) {
+    open func setImageInputs(_ inputs: [InputSource]) {
         images = inputs
         pageIndicator?.numberOfPages = inputs.count
 
         // in circular mode we add dummy first and last image to enable smooth scrolling
         if circular && images.count > 1 {
-            var scImages = [InputSource & InputNewSource]()
+            var scImages = [InputSource]()
 
             if let last = images.last {
                 scImages.append(last)
