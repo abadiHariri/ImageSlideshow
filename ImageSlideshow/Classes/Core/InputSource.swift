@@ -26,7 +26,7 @@ import Kingfisher
 }
 
 
-@objc public protocol InputNewSource : InputSource {
+@objc public protocol InputNewSource {
     /**
      Load image from the source to image view.
      - parameter imageView: Image view to load the image into.

@@ -208,7 +208,7 @@ open class ImageSlideshow: UIView {
     }
 
     fileprivate var slideshowTimer: Timer?
-    fileprivate var scrollViewImages = [InputSource]()
+    fileprivate var scrollViewImages = [InputSource & InputNewSource]()
     fileprivate var isAnimating: Bool = false
 
     /// Transitioning delegate to manage the transition to full screen controller
@@ -371,7 +371,7 @@ open class ImageSlideshow: UIView {
 
         // in circular mode we add dummy first and last image to enable smooth scrolling
         if circular && images.count > 1 {
-            var scImages = [InputSource]()
+            var scImages = [InputSource & InputNewSource]()
 
             if let last = images.last {
                 scImages.append(last)
