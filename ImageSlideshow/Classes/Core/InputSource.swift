@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 /// A protocol that can be adapted by different Input Source providers
 @objc public protocol InputSource {
     /**
@@ -23,6 +23,23 @@ import UIKit
      - parameter imageView: Image view that is loading the image
     */
     @objc optional func cancelLoad(on imageView: UIImageView)
+}
+
+
+@objc public protocol InputNewSource : InputSource {
+    /**
+     Load image from the source to image view.
+     - parameter imageView: Image view to load the image into.
+     - parameter callback: Callback called after image was set to the image view.
+     - parameter image: Image that was set to the image view.
+     */
+    func load(to imageView: AnimatedImageView, with callback: @escaping (_ image: UIImage?) -> Void)
+
+    /**
+     Cancel image load on the image view
+     - parameter imageView: Image view that is loading the image
+    */
+    @objc optional func cancelLoad(on imageView: AnimatedImageView)
 }
 
 /// Input Source to load plain UIImage

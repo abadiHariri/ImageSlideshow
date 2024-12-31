@@ -149,7 +149,7 @@ open class ImageSlideshow: UIView {
     open fileprivate(set) var scrollViewPage: Int = 0
 
     /// Input Sources loaded to slideshow
-    open fileprivate(set) var images = [InputSource]()
+    open fileprivate(set) var images = [InputSource & InputNewSource]()
 
     /// Image Slideshow Items loaded to slideshow
     open fileprivate(set) var slideshowItems = [ImageSlideshowItem]()
@@ -365,7 +365,7 @@ open class ImageSlideshow: UIView {
      Set image inputs into the image slideshow
      - parameter inputs: Array of InputSource instances.
      */
-    open func setImageInputs(_ inputs: [InputSource]) {
+    open func setImageInputs(_ inputs: [InputSource & InputNewSource]) {
         images = inputs
         pageIndicator?.numberOfPages = inputs.count
 

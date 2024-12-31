@@ -35,7 +35,7 @@ open class FullScreenSlideshowViewController: UIViewController {
     open var initialPage: Int = 0
 
     /// Input sources to 
-    open var inputs: [InputSource]?
+    open var inputs: [InputSource & InputNewSource]?
 
     /// Background color
     open var backgroundColor = UIColor.black
