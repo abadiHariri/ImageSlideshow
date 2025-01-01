@@ -23,12 +23,13 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/onevcat/Kingfisher.git", from: "7.11.0"),
-        .package(url: "https://github.com/Alamofire/AlamofireImage.git", from: "4.0.0"),
+        .package(url: "https://github.com/Alamofire/AlamofireImage.git", from: "4.3.0"),
         .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.1.0")
     ],
     targets: [
         .target(
             name: "ImageSlideshow",
+            dependencies: ["Kingfisher"],
             path: "ImageSlideshow",
             sources: [
                 "Classes/Core/ActivityIndicator.swift",
