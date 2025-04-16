@@ -1,19 +1,19 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 import PackageDescription
 
 let package = Package(
     name: "ImageSlideshow",
     platforms: [
-        .iOS(.v10),
+        .iOS(.v15)
     ],
     products: [
         .library(
             name: "ImageSlideshow",
             targets: ["ImageSlideshow"]),
-        .library(
-            name: "ImageSlideshow/Alamofire",
-            targets: ["ImageSlideshowAlamofire"]),
+//        .library(
+//            name: "ImageSlideshow/Alamofire",
+//            targets: ["ImageSlideshowAlamofire"]),
         .library(
             name: "ImageSlideshow/SDWebImage",
             targets: ["ImageSlideshowSDWebImage"]),
@@ -22,9 +22,9 @@ let package = Package(
             targets: ["ImageSlideshowKingfisher"])
     ],
     dependencies: [
-        .package(url: "https://github.com/onevcat/Kingfisher.git", from: "7.11.0"),
-        .package(url: "https://github.com/Alamofire/AlamofireImage.git", from: "4.3.0"),
-        .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.1.0")
+        .package(url: "https://github.com/onevcat/Kingfisher.git", from: "8.3.2"),
+     //   .package(url: "https://github.com/Alamofire/AlamofireImage.git", from: "4.3.0"),
+        .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.21.0")
     ],
     targets: [
         .target(
@@ -49,11 +49,11 @@ let package = Package(
                 .copy("Assets/ic_cross_white@2x.png"),
                 .copy("Assets/ic_cross_white@3x.png"),
             ]),
-        .target(
-            name: "ImageSlideshowAlamofire",
-            dependencies: ["ImageSlideshow", "AlamofireImage"],
-            path: "ImageSlideshow/Classes/InputSources",
-            sources: ["AlamofireSource.swift"]),
+//        .target(
+//            name: "ImageSlideshowAlamofire",
+//            dependencies: ["ImageSlideshow", "AlamofireImage"],
+//            path: "ImageSlideshow/Classes/InputSources",
+//            sources: ["AlamofireSource.swift"]),
         .target(
             name: "ImageSlideshowSDWebImage",
             dependencies: ["ImageSlideshow", "SDWebImage"],
@@ -64,6 +64,5 @@ let package = Package(
             dependencies: ["ImageSlideshow", "Kingfisher"],
             path: "ImageSlideshow/Classes/InputSources",
             sources: ["KingfisherSource.swift"])
-    ],
-    swiftLanguageVersions: [.v4, .v4_2, .v5]
+    ]
 )
