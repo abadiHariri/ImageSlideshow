@@ -268,13 +268,18 @@ class ZoomOutAnimator: ZoomAnimator, UIViewControllerAnimatedTransitioning {
         let params = animationParams(using: transitionContext)
 
         let animator = UIViewPropertyAnimator(duration: params.0, curve: .linear, animations: params.1)
-        animator.addCompletion(params.2)
+        
+       // animator.addCompletion(params.2)
+        animator.addCompletion { posstion in
+            params.2(posstion)
+        }
+        
         animatorForCurrentTransition = animator
 
         return animator
     }
 
-    private func animationParams(using transitionContext: UIViewControllerContextTransitioning) -> (TimeInterval, () -> Void, (Any) -> Void) {
+    private func animationParams(using transitionContext: UIViewControllerContextTransitioning) -> (TimeInterval, () -> Void, (UIViewAnimatingPosition) -> Void) {
         let toViewController: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
 
         guard let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as? FullScreenSlideshowViewController else {
@@ -364,9 +369,10 @@ class ZoomOutAnimator: ZoomAnimator, UIViewControllerAnimatedTransitioning {
         // Working around iOS 10+ breaking change requiring to use UIPropertyAnimator for proper interactive transition instead of UIView.animate
         if #available(iOS 10.0, *) {
             interruptibleAnimator(using: transitionContext).startAnimation()
-        } else {
-            let params = animationParams(using: transitionContext)
-            UIView.animate(withDuration: params.0, delay: 0, options: UIViewAnimationOptions(), animations: params.1, completion: params.2)
         }
+//        else {
+//            let params = animationParams(using: transitionContext)
+//            UIView.animate(withDuration: params.0, delay: 0, options: UIViewAnimationOptions(), animations: params.1, completion: params.2)
+//        }
     }
 }
