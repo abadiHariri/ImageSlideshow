@@ -15,6 +15,9 @@ import SDWebImage
 /// Input Source to image using SDWebImage
 @objcMembers
 public class SDWebImageSource: NSObject, InputSource {
+    /// whether the url points to an animated image
+    public var isAnimatedImage: Bool = false
+
     /// url to load
     public var url: URL
 
