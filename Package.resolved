@@ -5,7 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/abadiHariri/Kingfisher.git",
       "state" : {
-        "revision" : "1a2882da9716a8972c1134bf1cda71e742baa417"
+        "revision" : "1a2882da9716a8972c1134bf1cda71e742baa417",
+        "version" : "8.12.1"
       }
     },
     {
